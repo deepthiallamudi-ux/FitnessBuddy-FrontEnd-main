@@ -48,7 +48,7 @@ const mockData = {
       distance: 5,
       calories: 300,
       notes: 'Morning jog',
-      created_at: new Date()
+      created_at: new Date().toLocaleString()
     }
   ],
   buddies: [],

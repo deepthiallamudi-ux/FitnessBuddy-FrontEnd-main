@@ -103,6 +103,29 @@ export default function Challenges() {
 
   const handleUpdateProgress = async (memberId, newProgress) => {
     try {
+      // ID checks
+      if (!memberId || !user?.id) {
+        alert("Error: Missing member or user ID.")
+        return
+      }
+
+      // Deadline check
+      if (selectedChallenge) {
+        const now = new Date()
+        const endDate = selectedChallenge.end_date
+          ? new Date(selectedChallenge.end_date)
+          : (() => {
+              const durationDays = getDurationDays(selectedChallenge.duration)
+              const created = new Date(selectedChallenge.created_at)
+              created.setDate(created.getDate() + durationDays)
+              return created
+            })()
+        if (now > endDate) {
+          alert("Challenge deadline has passed. Progress updates are disabled.")
+          return
+        }
+      }
+
       const { error } = await supabase
         .from("challenge_members")
         .update({ progress: parseFloat(newProgress) })
@@ -111,13 +134,14 @@ export default function Challenges() {
       if (error) throw error
 
       alert("✅ Progress updated!")
-      
+
       // Check for challenge achievements
       await checkChallengeAchievements(user.id)
-      
+
       // Dispatch achievement update event
       window.dispatchEvent(new Event('achievementsUpdate'))
-      
+
+      // Refresh progress bar
       fetchChallengeDetails(selectedChallenge)
     } catch (error) {
       console.error("Error updating progress:", error)

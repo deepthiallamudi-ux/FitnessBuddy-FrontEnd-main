@@ -131,10 +131,7 @@ export const BuddyAPI = {
   update: (id, buddyData) => apiPut(`/buddies/${id}`, buddyData),
   
   // Delete buddy connection
-  delete: (id) => apiDelete(`/buddies/${id}`),
-  
-  // Get pending requests for user
-  getPendingRequests: (userId) => apiGet(`/buddies/pending/${userId}`)
+  delete: (id) => apiDelete(`/buddies/${id}`)
 }
 
 /**

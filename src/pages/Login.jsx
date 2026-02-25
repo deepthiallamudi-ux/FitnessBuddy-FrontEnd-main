@@ -317,7 +317,7 @@ export default function Login() {
                   title="Coming soon - Instagram login integration"
                   disabled
                 >
-                  <span>📷</span> Continue with Instagram (Coming Soon)
+                  <span>📷</span> Continue with Instagram
                 </motion.button>
               </div>
 

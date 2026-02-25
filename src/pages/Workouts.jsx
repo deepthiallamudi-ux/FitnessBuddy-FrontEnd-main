@@ -91,7 +91,7 @@ export default function Workouts() {
           id: user.id,
           email: user.email,
           username: user.email?.split("@")[0] || "user",
-          created_at: new Date()
+          created_at: new Date().toISOString()
         }])
 
         if (createError) {
@@ -113,7 +113,7 @@ export default function Workouts() {
             distance: distance ? parseFloat(distance) : null,
             calories,
             notes,
-            updated_at: new Date()
+            updated_at:  new Date().toISOString()
           })
           .eq("id", editingId)
 
@@ -133,7 +133,7 @@ export default function Workouts() {
             distance: distance ? parseFloat(distance) : null,
             calories,
             notes,
-            created_at: new Date()
+            created_at: new Date().toISOString()
           }
         ])
 
